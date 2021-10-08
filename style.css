@@ -33,6 +33,25 @@ body {
     width: 50%;
   }
   
+  .d-flex {
+    display: flex;
+  }
+
+  .variant-color {
+    border: 3px #d2d2d2 solid;
+    border-radius: 3px;
+    margin: 0px 1rem;
+    box-shadow: -1px 1px 4px black;
+    transition:0.2s;
+  }
+
+  .variant-color:hover {
+   box-shadow:inset -1px 1px 4px black;
+   transform: scale(1.1);
+   transition:0.2s;
+   cursor: pointer;
+  }
+
   .color-box {
     width: 40px;
     height: 40px;
@@ -86,4 +105,9 @@ body {
   .activeTab {
     color: #16C0B0;
     text-decoration: underline;
+   
+  }
+
+  .text-through {
+    text-decoration: line-through;
   }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,41 +8,47 @@
     <link rel="stylesheet" type="text/css" href="./style.css">
     <title>Product App</title>
 </head>
+
 <body>
-   
+
     <div class="nav-bar"></div>
 
     <div id="app">
         <div class="product">
-           <div class="product-image">
-               <img :src="image" :alt="colorsSocks">
+            <div class="product-image">
+                <img :src="image" :alt="colorsSocks">
             </div>
 
             <div class="product-info">
                 <h1>{{product}}</h1>
                 <a v-show="ancorProd" :href="link" target="_blank">More products like this</a>
                 <p v-if="inStock">In Stock</p>
-                <p v-else="">Out of Stock</p>
+                <p v-else="inStock" :class="[inStock ? '' : outStockLine ]">Out of Stock</p>
                 <span v-if="onSale">On Sale!</span>
-          
+
                 <ul>
                     <li v-for="detail in details"> {{detail}} </li>
                 </ul>
 
                 <ul v-for="size in sizes">
                     <li> {{size}} </li>
-                 </ul>
+                </ul>
 
-                <div v-for="variant in variants" :key="variant.variantId">
-                   <p @mouseover="updateProduct(variant.variantImage)">{{variant.variantColor}}</p>
+                <div class="d-flex">
+                    <div v-for="variant in variants" :key="variant.variantId" class="color-box variant-color"
+                        :style="{backgroundColor: variant.variantColor}"
+                        @mouseover="updateProduct(variant.variantImage)">
+                    </div>
                 </div>
+
 
 
                 <div class="cart">
                     <p>Cart({{cart}})</p>
                 </div>
-                <button @click="addToCart">Add to cart</button>
-                <button @click="removeToCart">Remove to cart</button>
+                <button @click="addToCart" :disabled="!inStock" :class="{disabledButton: !inStock }">
+                    Add to cart</button>
+                <button @click="removeToCart">Remove of cart</button>
 
             </div>
         </div>
@@ -50,4 +57,5 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <script src="main.js"></script>
 </body>
+
 </html>
