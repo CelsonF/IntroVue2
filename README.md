@@ -10,7 +10,7 @@ Basic Vue 2
 - ✔️ List Rendering
 - ✔️ Event Handling
 - ✔️ Class & Style Binding
-- ❌ Computed Properties
+- ✔️ Computed Properties
 - ❌ Components
 - ❌ Communicating Events
 - ❌ Forms & v-model
