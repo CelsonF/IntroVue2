@@ -20,11 +20,11 @@
             </div>
 
             <div class="product-info">
-                <h1>{{title}}</h1>
+                <h1 >{{title}}</h1>
                 <a v-show="ancorProd" :href="link" target="_blank">More products like this</a>
                 <p v-if="inStock">In Stock</p>
                 <p v-else="inStock" :class="[inStock ? '' : outStockLine ]">Out of Stock</p>
-                <span v-if="onSale">On Sale!</span>
+                <p> {{ sale }} </p>
 
                 <ul>
                     <li v-for="detail in details"> {{detail}} </li>
