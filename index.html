@@ -20,7 +20,7 @@
             </div>
 
             <div class="product-info">
-                <h1>{{product}}</h1>
+                <h1>{{title}}</h1>
                 <a v-show="ancorProd" :href="link" target="_blank">More products like this</a>
                 <p v-if="inStock">In Stock</p>
                 <p v-else="inStock" :class="[inStock ? '' : outStockLine ]">Out of Stock</p>
@@ -35,9 +35,8 @@
                 </ul>
 
                 <div class="d-flex">
-                    <div v-for="variant in variants" :key="variant.variantId" class="color-box variant-color"
-                        :style="{backgroundColor: variant.variantColor}"
-                        @mouseover="updateProduct(variant.variantImage)">
+                    <div v-for="(variant, index) in variants" :key="variant.variantId" class="color-box variant-color"
+                        :style="{backgroundColor: variant.variantColor}" @mouseover="updateProduct(index)">
                     </div>
                 </div>
 
@@ -48,7 +47,8 @@
                 </div>
                 <button @click="addToCart" :disabled="!inStock" :class="{disabledButton: !inStock }">
                     Add to cart</button>
-                <button @click="removeToCart">Remove of cart</button>
+                <button @click="removeToCart" :disabled="!inStock" :class="{disabledButton: !inStock}">Remove of
+                    cart</button>
 
             </div>
         </div>
