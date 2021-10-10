@@ -20,7 +20,7 @@
             </div>
 
             <div class="product-info">
-                <h1 >{{title}}</h1>
+                <h1>{{title}}</h1>
                 <a v-show="ancorProd" :href="link" target="_blank">More products like this</a>
                 <p v-if="inStock">In Stock</p>
                 <p v-else="inStock" :class="[inStock ? '' : outStockLine ]">Out of Stock</p>
@@ -41,14 +41,19 @@
                 </div>
 
 
-
-                <div class="cart">
-                    <p>Cart({{cart}})</p>
+                <div class="d-flex product-footer">
+                    <div class="cart">
+                        <p>Cart({{cart}})</p>
+                    </div>
+                    <div class="d-flex">
+                         <button @click="addToCart" class="mr-2" :disabled="!inStock" :class="{disabledButton: !inStock }">
+                        Add to cart</button>
+                    <button @click="removeToCart" :disabled="!inStock" :class="{disabledButton: !inStock}">Remove of
+                        cart</button>
+                    </div>
+                   
                 </div>
-                <button @click="addToCart" :disabled="!inStock" :class="{disabledButton: !inStock }">
-                    Add to cart</button>
-                <button @click="removeToCart" :disabled="!inStock" :class="{disabledButton: !inStock}">Remove of
-                    cart</button>
+
 
             </div>
         </div>

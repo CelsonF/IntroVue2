@@ -71,9 +71,12 @@ body {
     background-color: #1E95EA;
     color: white;
     height: 40px;
-    width: 100px;
     font-size: 14px;
   } 
+
+  button:hover {
+    cursor: pointer;
+  }
   
   .disabledButton {
     background-color: #d8d8d8;
@@ -111,3 +114,12 @@ body {
   .text-through {
     text-decoration: line-through;
   }
+
+  .product-footer {
+    justify-content: space-between;
+    flex-direction: row-reverse;
+}
+
+.mr-2 {
+  margin-right: 2rem;
+}
