@@ -11,7 +11,7 @@ Basic Vue 2
 - ✔️ Event Handling
 - ✔️ Class & Style Binding
 - ✔️ Computed Properties
-- ❌ Components
+- ✔️ Components
 - ❌ Communicating Events
 - ❌ Forms & v-model
 - ❌ Tabs
