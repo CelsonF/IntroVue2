@@ -49,9 +49,6 @@ Vue.component('product', {
     
     
             <div class="d-flex product-footer">
-                <div class="cart">
-                    <p>Cart({{cart}})</p>
-                </div>
                 <div class="d-flex">
                      <button @click="addToCart" class="mr-2" :disabled="!inStock" :class="{disabledButton: !inStock }">
                     Add to cart</button>
@@ -91,17 +88,14 @@ Vue.component('product', {
             ],
     
             sizes: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
-    
-            cart: 0
         }
     },
     methods: {
         addToCart() {
-            this.cart += 1
+            this.$emit('add-to-cart',this.variants[this.selectedVariant].variantId);
         },
         removeToCart() {
-            if (this.cart !== 0)
-                this.cart -= 1
+          this.$emit('remove-of-cart');
         },
         updateProduct(index) {
             this.selectedVariant = index
@@ -135,6 +129,16 @@ Vue.component('product', {
 var app = new Vue({
     el: '#app',
     data: {
-        premium:true
+        premium:true,         
+        cart: []
+    },
+    methods: {
+        updateCart(id) {
+            this.cart.push(id);
+        },
+        removeProductCart(id) {
+            if (this.cart.length !== 0)
+            this.cart.shift(id);
+        }
     }
 });
