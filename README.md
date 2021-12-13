@@ -13,5 +13,5 @@ Basic Vue 2
 - ✔️ Computed Properties
 - ✔️ Components
 - ✔️ Communicating Events
-- ❌ Forms & v-model
-- ❌ Tabs
+- ✔️ Forms & v-model
+- ✔️ Tabs
