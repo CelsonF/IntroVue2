@@ -58,6 +58,22 @@ Vue.component('product', {
                
             </div>
         </div>
+
+        <div>
+          <h2>Reviews</h2>
+          <p v-if="!reviews.length"> There are no reviews yet.</p>
+          <ul>
+           <li v-for="review in reviews">
+            <p>{{ review.name }}</p>
+            <p>Rating: {{ review.rating }}</p>
+            <p>{{ review.review }}</p>
+            <p>{{ review.recommend }}</p>
+           </li>
+          </ul>
+        </div>
+
+        <product-review @review-submitted="addReview"></product-review>
+
     </div> 
     `,
     data() {
@@ -88,6 +104,8 @@ Vue.component('product', {
             ],
     
             sizes: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
+
+            reviews:[]
         }
     },
     methods: {
@@ -99,6 +117,10 @@ Vue.component('product', {
         },
         updateProduct(index) {
             this.selectedVariant = index
+        },
+        addReview(productReview) {
+         this.reviews.push(productReview);
+         console.log(this.reviews)
         }
     },
     computed: {
@@ -122,6 +144,98 @@ Vue.component('product', {
               return "Free"
             }
               return "2,99"
+        }
+    }
+})
+
+Vue.component('product-review', {
+    template: 
+    `<form class="review-form" @submit.prevent="onSubmit">
+
+     <p v-if="erros.length">
+      <b> Please correct the following error(s): </b>
+      <ul>
+       <li v-for="erro in erros">
+         {{erro}}
+       </li>
+      </ul>
+     </p>
+
+      <p>
+        <label for="name">Name:</label>
+        <input id="name" v-model="name" placeholder="Name">
+      </p>
+
+      <p>
+        <label for="review">Review:</label>
+        <textarea id="review" v-model="review"></textarea>
+      </p>
+
+      <p>
+        <label for="rating">Rating:</label>
+        <select id="rating" v-model.number="rating">
+          <option>5</option>
+          <option>4</option>
+          <option>3</option>
+          <option>2</option>
+          <option>1</option>
+        </select>
+      </p>
+
+      <p>
+       <label>Would you recommend this product ?</label>
+       <div class="d-flex radios">
+         <div>
+          <label> Yes </label>
+          <input name="recommendation" v-model="recommend" type="radio" value="Yes"> 
+         </div>    
+         <div>
+          <label> No </label>
+          <input name="recommendation" v-model="recommend" type="radio"  value="No">
+         </div> 
+        
+       </div>
+      </p>
+
+      <p>
+        <input type="submit" value="Submit">  
+      </p>  
+
+    </form>`,
+    data() {
+        return {
+            name:null,
+            review:null,
+            rating:null,
+            recommend:null,
+            erros:[]
+        }
+    },
+    methods: {
+        onSubmit() {
+            this.erros = [];
+            if(this.name && this.review && this.rating && this.recommend)
+            {
+                let productReview = {
+                name: this.name,
+                review:this.review,
+                rating:this.rating,
+                recommend:this.recommend,
+               }
+            this.$emit('review-submitted',productReview)
+            this.name = null
+            this.review = null
+            this.rating = null
+            this.recommend = null
+            }
+            else {
+                if (!this.name) this.erros.push("Name is required.")
+                if (!this.review) this.erros.push("Review is required.")
+                if (!this.recommend) this.erros.push("Recommend is required.")   
+                if (!this.rating) this.erros.push("Rating is required.")   
+            }
+
+            
         }
     }
 })
